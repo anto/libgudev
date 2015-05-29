@@ -1,0 +1,37 @@
+#! /usr/bin/make -f
+
+#export DH_VERBOSE=1
+#export DEB_BUILD_OPTIONS="nostrip"
+
+VERSION = $(shell dpkg-parsechangelog | sed -n -e '/^Version:/s/.*: //p')
+
+# sparc fails in g-i-scanner for GUdev (#760879)
+ifneq ($(findstring $(DEB_BUILD_ARCH), sparc),)
+    LD=ld
+endif
+
+%:
+	dh $@ --with autoreconf,gir
+
+autoreconf:
+	gtkdocize --copy --docdir docs/
+	autoreconf -f -i
+
+override_dh_autoreconf:
+	dh_autoreconf debian/rules -- autoreconf
+
+override_dh_auto_configure:
+	dh_auto_configure -- --enable-gtk-doc
+
+override_dh_makeshlibs:
+	dh_makeshlibs --remaining-packages -- -c4
+
+override_dh_strip:
+	dh_strip --dbg-package=libgudev-1.0-dbg
+
+override_dh_gencontrol:
+	# Ubuntu has an epoch on gudev
+	if dpkg-vendor --is ubuntu; then \
+		dh_gencontrol -plibgudev-1.0-0 -plibgudev-1.0-dev -pgir1.2-gudev-1.0 -- "-v1:$(VERSION)"; \
+	fi
+	dh_gencontrol --remaining-packages

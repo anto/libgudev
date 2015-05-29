@@ -1,0 +1,8 @@
+libgudev (219-11) unstable; urgency=medium
+
+  * Initial release after the split from src:systemd. We use the version
+    number 219-11, since 219-10 was the last version where it was built from
+    src:systemd. See also the upstream announcement at
+    http://lists.freedesktop.org/archives/systemd-devel/2015-May/032070.html
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 29 May 2015 08:18:56 +0200
