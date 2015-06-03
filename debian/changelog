@@ -1,6 +1,7 @@
-libgudev (219-13) UNRELEASED; urgency=medium
+libgudev (230-1) UNRELEASED; urgency=medium
 
   * Add a watch file to track new upstream releases.
+  * New upstream release.
 
  -- Michael Biebl <biebl@debian.org>  Wed, 03 Jun 2015 02:10:28 +0200
 
