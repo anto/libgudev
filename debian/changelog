@@ -1,3 +1,9 @@
+libgudev (219-13) UNRELEASED; urgency=medium
+
+  * Add a watch file to track new upstream releases.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 03 Jun 2015 02:10:28 +0200
+
 libgudev (219-12) unstable; urgency=medium
 
   * Properly switch from doc symlinks to directories on upgrades.
