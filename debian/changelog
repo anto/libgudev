@@ -1,7 +1,13 @@
 libgudev (230-2) UNRELEASED; urgency=medium
 
+  [ Martin Pitt ]
   * Bump epoch for -dbg package for Ubuntu build as well, to make it
     installable.
+
+  [ Michael Biebl ]
+  * Drop our hack to override the linker on sparc. This was copied over from
+    the systemd split but it is no longer necessary as the libgudev build
+    system does not override the default linker.
 
  -- Martin Pitt <mpitt@debian.org>  Sun, 07 Jun 2015 17:46:20 +0200
 
