@@ -1,12 +1,10 @@
 Source: libgudev
 Section: libs
 Priority: optional
-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
-Uploaders: Michael Biebl <biebl@debian.org>,
-           Martin Pitt <mpitt@debian.org>
+Maintainer: Anto <aryanto@chello.at>
 Standards-Version: 3.9.6
-Vcs-Git: git://anonscm.debian.org/collab-maint/libgudev.git
-Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/libgudev.git
+Vcs-Git: git://github.com/anto/libgudev.git
+Vcs-Browser: https://github.com/anto/libgudev.git
 Homepage: https://wiki.gnome.org/Projects/libgudev
 Build-Depends: debhelper (>= 9),
                pkg-config,

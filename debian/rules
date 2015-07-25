@@ -9,8 +9,8 @@ VERSION = $(shell dpkg-parsechangelog | sed -n -e '/^Version:/s/.*: //p')
 	dh $@ --with autoreconf,gir
 
 autoreconf:
+	NOCONFIGURE=yes ./autogen.sh
 	gtkdocize --copy --docdir docs/
-	autoreconf -f -i
 
 override_dh_autoreconf:
 	dh_autoreconf debian/rules -- autoreconf
