@@ -27,7 +27,6 @@
 
 #include "gudevclient.h"
 #include "gudevdevice.h"
-#include "gudevmarshal.h"
 #include "gudevprivate.h"
 
 /**
@@ -297,7 +296,7 @@ g_udev_client_class_init (GUdevClientClass *klass)
                                          G_STRUCT_OFFSET (GUdevClientClass, uevent),
                                          NULL,
                                          NULL,
-                                         g_udev_marshal_VOID__STRING_OBJECT,
+                                         g_cclosure_marshal_generic,
                                          G_TYPE_NONE,
                                          2,
                                          G_TYPE_STRING,
@@ -525,9 +524,40 @@ g_udev_client_query_by_subsystem_and_name (GUdevClient  *client,
   return device;
 }
 
-struct udev *
-_g_udev_client_get_udev (GUdevClient *client)
+struct udev_enumerate *
+_g_udev_client_new_enumerate (GUdevClient *client)
 {
-  g_return_val_if_fail (G_UDEV_IS_CLIENT (client), NULL);
-  return client->priv->udev;
+  struct udev_enumerate *enumerate;
+
+  enumerate = udev_enumerate_new (client->priv->udev);
+
+  if (client->priv->subsystems != NULL)
+    {
+      guint n;
+      for (n = 0; client->priv->subsystems[n] != NULL; n++)
+        {
+          gchar *subsystem;
+          gchar *devtype;
+          gchar *s;
+
+          subsystem = g_strdup (client->priv->subsystems[n]);
+          devtype = NULL;
+
+          s = strstr (subsystem, "/");
+          if (s != NULL)
+            {
+              devtype = s + 1;
+              *s = '\0';
+            }
+
+          udev_enumerate_add_match_subsystem (enumerate, subsystem);
+
+          if (devtype != NULL)
+            udev_enumerate_add_match_property (enumerate, "DEVTYPE", devtype);
+
+          g_free (subsystem);
+        }
+    }
+
+  return enumerate;
 }
