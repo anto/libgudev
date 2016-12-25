@@ -1,3 +1,10 @@
+libgudev (230-2.2) UNRELEASED; urgency=medium
+
+  Merge upstream updates up to commit 7cf0fde672e6b0eb6c48fc5ab533da948b1ab74a - 02/11/2016
+  Synchronise local patches after merging
+
+ -- Anto <aryanto@chello.at>  Sun, 25 Dec 2016 14:00:11 +0100
+
 libgudev (230-2.1) UNRELEASED; urgency=medium
 
   Preparation to merge into GNOME/libgudev
